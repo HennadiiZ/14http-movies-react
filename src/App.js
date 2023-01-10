@@ -9,17 +9,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // useEffect(() => {
-  //   fetchMoviesHandler();
-  // }, []);
-
   const fetchMoviesHandler =  useCallback( async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await fetch('https://swapi.dev/api/films');
-      
+      // const response = await fetch('https://swapi.dev/api/films');
+      const response = await fetch('https://react-http-38022-default-rtdb.firebaseio.com/movies.json');
       if (!response.ok) {
         throw new Error('Something went wrong ***!');
       }
@@ -36,11 +32,14 @@ function App() {
       });
       setMovies(transformedMovies);
     } catch (error) {
-      // setIsLoading(false);
       setError(error.message);
     }
     setIsLoading(false);
   }, []);
+
+  function addMovieHandler(movie) {
+    console.log(movie);
+  }
 
   useEffect(() => {
     fetchMoviesHandler();
@@ -60,19 +59,15 @@ function App() {
     content = <p>Loading...</p>;
   }
 
-
-
-
   return (
     <React.Fragment>
+      <section>
+        <AddMovie onAddMovie={addMovieHandler}/>
+      </section>
       <section>
         <button onClick={fetchMoviesHandler}>Fetch Movie</button>
       </section>
       <section>
-        {/* {!isLoading && movies.length > 0 && <MoviesList movies={movies}/>}
-        {!isLoading &&  movies.length === 0 && !error && <p>Found no movies.</p>}
-        {isLoading && content}
-        {!isLoading && error && <p>{error}</p>} */}
         {content}
       </section>
     </React.Fragment>
