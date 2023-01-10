@@ -10,3 +10,5 @@ root.render(<App />);
 // 177 Sending a GET Request
 
 // 178 Using async _ await
+
+// 179 Handling Loading & Data States
