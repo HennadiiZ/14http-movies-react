@@ -12,3 +12,5 @@ root.render(<App />);
 // 178 Using async _ await
 
 // 179 Handling Loading & Data States
+
+// 180 Handling Http Errors
